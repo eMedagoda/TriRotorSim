@@ -1,0 +1,8 @@
+clc
+clear all
+close all
+
+fid = fopen('../TriRotorDocuments/first_control_works.xlsx','r')
+
+data = 
+

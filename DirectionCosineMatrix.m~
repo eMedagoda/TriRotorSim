@@ -1,0 +1,39 @@
+function [C_bn] = DirectionCosineMatrix(X)
+
+% rotational transformation about z-axis
+C3 = L3(X(9));
+
+% rotational transformation about y-axis
+C2 = L2(X(8));
+
+% rotational transformation about x-axis
+C1 = L1(X(7));
+
+% transformation matrix from navigation frame to body frame
+C_bn = [C1*C2*C3];
+
+return
+
+function [L1] = L1(phi)
+
+L1 = [1        0         0  ;
+    0  cos(phi)  sin(phi) ;
+    0  -sin(phi) cos(phi)];
+
+return
+
+function [L2] = L2(theta)
+
+L2 = [cos(theta) 0  -sin(theta) ;
+    0     1       0      ;
+    sin(theta) 0   cos(theta)];
+
+return
+
+function [L3] = L3(psi)
+
+L3 = [ cos(psi)  sin(psi) 0 ;
+    -sin(psi)  cos(psi) 0 ;
+    0         0     1];
+
+return

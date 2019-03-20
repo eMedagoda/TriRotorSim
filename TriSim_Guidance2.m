@@ -1,0 +1,33 @@
+function [V_C, psi_C] = TriSim_Guidance2(P_V,P_T,psi_T)
+
+% vehicle position (navigation frame)
+x_V = P_V(1);
+y_V = P_V(2);
+
+% target position (navigation frame)
+x_T = P_T(1);
+y_T = P_T(2);
+
+V_max = 2;
+k_v = 1;
+
+% position errors (navigation frame)
+r_x0 = x_T - x_V;
+r_y0 = y_T - y_V;
+
+% transform errors into target frame
+r_hat = L3(psi_T)*[r_x0;r_y0;0];
+
+% along-track and cross-track errors (target frame)
+r_x = r_hat(1);
+r_y = r_hat(2);
+
+psi_C_hat = atan2(r_y0,(r_x+4));
+
+psi_C = psi_T + 1.5*psi_C_hat;
+
+psi_C = PiMinusPi(psi_C);
+
+V_C = (2*V_max/pi)*atan(k_v * r_x);
+
+return

@@ -1,0 +1,5 @@
+clc
+clear all
+close all
+
+fopen = "../../TriRotorDocuments/first_control_works.xlsx"
